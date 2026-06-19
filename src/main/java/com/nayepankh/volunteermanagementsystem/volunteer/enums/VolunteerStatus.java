@@ -1,8 +1,6 @@
 package com.nayepankh.volunteermanagementsystem.volunteer.enums;
 
-public enum VolunteeerStatus{
-
+public enum VolunteerStatus {
     ACTIVE,
     INACTIVE
-
 }

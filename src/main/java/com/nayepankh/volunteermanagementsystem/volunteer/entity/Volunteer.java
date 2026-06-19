@@ -1,12 +1,13 @@
 package com.nayepankh.volunteermanagementsystem.volunteer.entity;
 
 
-import com.nayepankh.volunteermanagementsystem.volunteer.enums.VolunteeerStatus;
+import com.nayepankh.volunteermanagementsystem.volunteer.enums.VolunteerStatus;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -48,9 +49,9 @@ public class Volunteer {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private VolunteeerStatus status =  VolunteeerStatus.ACTIVE;
+    private VolunteerStatus status =  VolunteerStatus.ACTIVE;
 
-    private LocalDateTime jointedDate;
+    private LocalDate joinedDate;
 
     @CreationTimestamp
     @Column(updatable = false)
@@ -58,9 +59,6 @@ public class Volunteer {
 
     @UpdateTimestamp
     private LocalDateTime updatedAt;
-
-
-
 
 
 
