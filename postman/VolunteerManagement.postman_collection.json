@@ -1,0 +1,141 @@
+{
+  "info": {
+    "name": "NGO Volunteer Management",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080" },
+    { "key": "token",   "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register Admin",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/auth/register",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"admin\",\n  \"email\": \"admin@ngo.org\",\n  \"password\": \"Admin@123\",\n  \"role\": \"admin\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "event": [{
+            "listen": "test",
+            "script": {
+              "exec": [
+                "const res = pm.response.json();",
+                "pm.collectionVariables.set('token', res.data.accessToken);"
+              ]
+            }
+          }],
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/auth/login",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"usernameOrEmail\": \"admin\",\n  \"password\": \"Admin@123\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Volunteers",
+      "item": [
+        {
+          "name": "Create Volunteer",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/volunteers",
+            "header": [
+              { "key": "Content-Type",  "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fullName\": \"Priya Sharma\",\n  \"email\": \"priya@example.com\",\n  \"phoneNumber\": \"+919876543210\",\n  \"city\": \"Mumbai\",\n  \"skills\": \"Teaching, Medical Aid\",\n  \"availability\": \"Weekends\",\n  \"status\": \"ACTIVE\",\n  \"joinedDate\": \"2024-01-15\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Get All Volunteers",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/volunteers?page=0&size=10&sortBy=fullName&sortDir=asc",
+              "query": [
+                { "key": "page",    "value": "0" },
+                { "key": "size",    "value": "10" },
+                { "key": "sortBy",  "value": "fullName" },
+                { "key": "sortDir", "value": "asc" }
+              ]
+            },
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }]
+          }
+        },
+        {
+          "name": "Get Volunteer By ID",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/volunteers/1",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }]
+          }
+        },
+        {
+          "name": "Update Volunteer",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/volunteers/1",
+            "header": [
+              { "key": "Content-Type",  "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fullName\": \"Priya Sharma\",\n  \"email\": \"priya@example.com\",\n  \"city\": \"Pune\",\n  \"skills\": \"Teaching, Fundraising\",\n  \"status\": \"ACTIVE\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Delete Volunteer",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/volunteers/1",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }]
+          }
+        },
+        {
+          "name": "Search by Name",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/volunteers/search?name=Priya",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }]
+          }
+        },
+        {
+          "name": "Search by City",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/volunteers/search?city=Mumbai",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }]
+          }
+        },
+        {
+          "name": "Search by Skill",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/volunteers/search?skill=Teaching",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }]
+          }
+        }
+      ]
+    }
+  ]
+}

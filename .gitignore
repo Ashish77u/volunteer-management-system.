@@ -19,6 +19,9 @@ target/
 *.iml
 *.ipr
 
+### Keep real credentials private
+src/main/resources/application.properties
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
