@@ -1,5 +1,6 @@
 package com.nayepankh.volunteermanagementsystem.auth.dto.response;
 
+
 import lombok.*;
 
 @Getter
@@ -8,6 +9,8 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AuthResponse {
+
+    @Builder.Default
     private String tokenType = "Bearer";
     private String accessToken;
     private String username;

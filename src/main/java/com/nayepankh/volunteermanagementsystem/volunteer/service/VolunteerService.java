@@ -5,7 +5,6 @@ import com.nayepankh.volunteermanagementsystem.volunteer.dto.response.PagedRespo
 import com.nayepankh.volunteermanagementsystem.volunteer.dto.response.VolunteerResponse;
 
 public interface VolunteerService {
-
     VolunteerResponse create(VolunteerRequest request);
     PagedResponse<VolunteerResponse> getAll(int page, int size, String sortBy, String sortDir);
     VolunteerResponse getById(Long id);

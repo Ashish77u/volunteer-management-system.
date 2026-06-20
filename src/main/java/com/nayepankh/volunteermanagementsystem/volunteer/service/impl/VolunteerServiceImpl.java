@@ -26,7 +26,7 @@ import java.util.List;
 public class VolunteerServiceImpl implements VolunteerService {
 
     private final VolunteerRepository volunteerRepository;
-    private final VolunteerMapper volunteerMapper;
+    private final VolunteerMapper     volunteerMapper;
 
     @Override
     @Transactional
