@@ -2,6 +2,35 @@
 
 > A production-quality REST API for NGO volunteer management — built with Java 21, Spring Boot 3.x, Spring Security 6, and JWT Authentication.
 
+> Register with Admin
+![alt text](register-admin.png)
+
+> Login with Admin (with invalid credential)
+![alt text](login-admin-fail.png)
+
+> Login with Admin (with valid credential)
+![alt text](login-admin-success.png)
+
+> Register with User
+![alt text](register-user.png)
+
+> Login with User
+![alt text](login-user-success.png)
+
+> Create Volunteer (Only Admin)
+![alt text](volunteer-admin.png)
+
+> Create Volunteer (using User - error 404)
+![alt text](volunteer-user.png)
+
+> Create Volunteer (Only Admin - with insufficient data )
+![alt text](volunteer-admin-invalid-data.png) 
+
+> Get All Volunteer
+![alt text](get-all-volunteer.png)
+
+
+
 ![Java](https://img.shields.io/badge/Java-21-orange?style=flat-square&logo=openjdk)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.2.5-brightgreen?style=flat-square&logo=springboot)
 ![Spring Security](https://img.shields.io/badge/Spring%20Security-6-brightgreen?style=flat-square&logo=springsecurity)
@@ -535,8 +564,8 @@ Authorization: Bearer <token>
 1. Open Postman
 2. Click **Import** → drag `postman/VolunteerManagement.postman_collection.json`
 3. Collection variables are pre-configured:
-    - `baseUrl` → `http://localhost:8080`
-    - `token` → auto-filled after login
+   - `baseUrl` → `http://localhost:8080`
+   - `token` → auto-filled after login
 
 ### Test Sequence
 
