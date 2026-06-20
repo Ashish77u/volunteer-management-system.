@@ -7,38 +7,22 @@ import lombok.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class VolunteerResponse {
-
-        /*
-    private Long id;
-    private String fullName;
-    private String email;
-    private String phoneNumber;
-    private String city;
-    private String skills;
-    private String availability;
-    private VolunteeerStatus status =  VolunteeerStatus.ACTIVE;
-    private LocalDate jointedDate;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-     */
-
-    private Long id;
-    private String fullName;
-    private String email;
-    private String phoneNumber;
-    private String city;
-    private String skills;
-    private String availability;
+    private Long            id;
+    private String          fullName;
+    private String          email;
+    private String          phoneNumber;
+    private String          city;
+    private String          skills;
+    private String          availability;
     private VolunteerStatus status;
-    private LocalDate joinedDate;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-
+    private LocalDate       joinedDate;
+    private LocalDateTime   createdAt;
+    private LocalDateTime   updatedAt;
 }

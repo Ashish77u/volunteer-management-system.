@@ -1,4 +1,4 @@
-package com.nayepankh.volunteermanagementsystem.auth.dto;
+package com.nayepankh.volunteermanagementsystem.auth.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -6,18 +6,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter
-@AllArgsConstructor
+@Getter
+@Setter
 @NoArgsConstructor
-
+@AllArgsConstructor
 public class LoginRequest {
 
-    @NotBlank(message = "Username and email is required")
+    @NotBlank(message = "Username or email is required")
     private String usernameOrEmail;
 
-    @NotBlank(message = "password is required")
+    @NotBlank(message = "Password is required")
     private String password;
-
-
 
 }

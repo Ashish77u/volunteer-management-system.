@@ -24,18 +24,15 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-//    private static final HttpMethod SWAGGER_WHITLIST = ;
-    private final JwtAuthenticationFilter jwtAuthenticationFilter;
-    private final CustomUserDetailsService customUserDetailsService;
+    private final JwtAuthenticationFilter   jwtAuthenticationFilter;
+    private final CustomUserDetailsService  userDetailsService;
 
     private static final String[] SWAGGER_WHITELIST = {
+            "/swagger-ui/**",
             "/swagger-ui.html",
-            "/swagger-ui/",
             "/api-docs/**",
             "/api-docs.yaml"
-
     };
-
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -45,10 +42,9 @@ public class SecurityConfig {
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(customUserDetailsService);
+        provider.setUserDetailsService(userDetailsService);
         provider.setPasswordEncoder(passwordEncoder());
         return provider;
-
     }
 
     @Bean
@@ -57,27 +53,23 @@ public class SecurityConfig {
         return config.getAuthenticationManager();
     }
 
-
-
-
-
-
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(AbstractHttpConfigurer:: disable)
+                .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                // public endpoints
-                                .requestMatchers("/api/auth/**").permitAll()
-                                .requestMatchers(SWAGGER_WHITELIST).permitAll()
-                // admin endpoints
-                                .requestMatchers(HttpMethod.POST,   "/api/volunteers/**").hasRole("ADMIN")
-                                .requestMatchers(HttpMethod.PUT,   "/api/volunteers/**").hasRole("ADMIN")
-                                .requestMatchers(HttpMethod.DELETE, "/api/volunteers/**").hasRole("ADMIN")
-                // Both roles can read
-                                .requestMatchers(HttpMethod.GET, "/api/volunteers/**").hasAnyRole("ADMIN","USER")
-                                .anyRequest().authenticated()
+                        // Public endpoints
+                        .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers(SWAGGER_WHITELIST).permitAll()
+                        // Admin-only write operations
+                        .requestMatchers(HttpMethod.POST,   "/api/volunteers/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT,    "/api/volunteers/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/volunteers/**").hasRole("ADMIN")
+                        // Both roles can read
+                        .requestMatchers(HttpMethod.GET,    "/api/volunteers/**").hasAnyRole("ADMIN", "USER")
+                        .anyRequest().authenticated()
                 )
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtAuthenticationFilter,
@@ -85,5 +77,4 @@ public class SecurityConfig {
 
         return http.build();
     }
-
 }

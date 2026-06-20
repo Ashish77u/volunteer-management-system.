@@ -14,44 +14,28 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-
 public class VolunteerRequest {
 
-    /*
-    private Long id;
+    @NotBlank(message = "Full name is required")
+    @Size(max = 100, message = "Name must not exceed 100 characters")
     private String fullName;
+
+    @NotBlank(message = "Email is required")
+    @Email(message = "Invalid email format")
     private String email;
+
+    @Pattern(regexp = "^[+]?[0-9]{10,15}$", message = "Invalid phone number")
     private String phoneNumber;
+
+    @Size(max = 50)
     private String city;
+
     private String skills;
+
+    @Size(max = 100)
     private String availability;
-    private VolunteeerStatus status =  VolunteeerStatus.ACTIVE;
-    private LocalDateTime jointedDate;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-     */
 
+    private VolunteerStatus status;
 
-        @NotBlank(message = "Full name is required")
-        @Size(max = 100, message = "Name must not exceed 100 characters")
-        private String fullName;
-
-        @NotBlank(message = "Email is required")
-        @Email(message = "Invalid email format")
-        private String email;
-
-        @Pattern(regexp = "^[+]?[0-9]{10,15}$", message = "Invalid phone number")
-        private String phoneNumber;
-
-        @Size(max = 50)
-        private String city;
-
-        private String skills;
-
-        @Size(max = 100)
-        private String availability;
-
-        private VolunteerStatus status;
-
-        private LocalDate joinedDate;
-    }
+    private LocalDate joinedDate;
+}

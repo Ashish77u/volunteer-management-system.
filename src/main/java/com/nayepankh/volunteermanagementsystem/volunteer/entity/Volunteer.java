@@ -12,27 +12,25 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "volunteers", indexes = {
-        @Index(name = "idx_vol_city", columnList = "city"),
+        @Index(name = "idx_vol_city",   columnList = "city"),
         @Index(name = "idx_vol_status", columnList = "status"),
-        @Index(name = "idx_vol_name", columnList = "full_name")
+        @Index(name = "idx_vol_name",   columnList = "full_name")
 })
-@Setter @Getter
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-
-
-
 public class Volunteer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false, length = 100)
     private String fullName;
 
-    @Column(nullable = false, length = 50, unique = true)
+    @Column(nullable = false, unique = true, length = 100)
     private String email;
 
     @Column(length = 15)
@@ -49,7 +47,7 @@ public class Volunteer {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private VolunteerStatus status =  VolunteerStatus.ACTIVE;
+    private VolunteerStatus status = VolunteerStatus.ACTIVE;
 
     private LocalDate joinedDate;
 
@@ -59,7 +57,4 @@ public class Volunteer {
 
     @UpdateTimestamp
     private LocalDateTime updatedAt;
-
-
-
 }

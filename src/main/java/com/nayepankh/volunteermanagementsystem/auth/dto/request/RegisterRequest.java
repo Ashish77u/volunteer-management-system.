@@ -1,4 +1,4 @@
-package com.nayepankh.volunteermanagementsystem.auth.dto;
+package com.nayepankh.volunteermanagementsystem.auth.dto.request;
 
 import jakarta.persistence.Entity;
 import jakarta.validation.constraints.Email;
@@ -7,12 +7,10 @@ import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.annotations.BatchSize;
 
-@Data
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class RegisterRequest {
 
     @NotBlank(message = "Username is required")
@@ -27,7 +25,6 @@ public class RegisterRequest {
     @Size(min = 6, max = 100, message = "Password must be at least 6 characters")
     private String password;
 
-    //Optional : default role is ROLE_USER if not provided
+    // Optional: defaults to ROLE_USER if not provided
     private String role;
-
 }
